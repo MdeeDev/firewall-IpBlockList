@@ -2,6 +2,8 @@
 # It adds those IPs to windows firewall, and creates block rules for them.
 # Author: MdeeDev
 # Github: https://github.com/MdeeDev
+# How to use: open cmd in the same directory then
+# > powershell.exe -executionpolicy bypass -File \.blockiplist.ps1
 
 $filename=""
 write-host "[ ] Welcome to the FireWall Ip BlockList Script"
@@ -50,9 +52,10 @@ For($i=0;$i -lt $nchunks;$i++)
     
 	write-host "--------"
     if($newOrUpdate -eq "N")
-    {  
+        {  
         #Updating existing rules
         netsh advfirewall firewall set rule name=$ruleName$RuleNameNo new remoteip="$commaLine" 
+        }
     else
 	   {
         #Creating new rules    
@@ -60,6 +63,7 @@ For($i=0;$i -lt $nchunks;$i++)
        }
 	clear 
 }
+
 write-host "[ ] Done !"
 write-host "[ ] $nchunks Firewall rules added!"
 write-host "[ ] $nlines IPs added!"
